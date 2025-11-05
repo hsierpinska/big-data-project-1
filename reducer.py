@@ -1,14 +1,3 @@
-
-# assume the input file is already sorted
-
-# filename = 'example-red-input.txt'
-
-#correct output
-# abc123,2023	2,47.5
-# abc123,2024	1,60.0
-# xyz789,2023	2,35.0
-
-# file = open(filename, 'r')
 last_key = None
 sum_count = 0
 sum_age = 0
@@ -20,7 +9,6 @@ for line in sys.stdin:
     year = int(key.split(",")[1])
     count = int(value.split(",")[0])
     age = int(value.split(",")[1])
-    # kluczem jest para visit_id, year
     if last_key == key:
         sum_count += count
         sum_age += age
