@@ -17,3 +17,18 @@ total_patients – łączna liczba pacjentów w regionie dla danego typu szpital
 avg_age – średni wiek pacjentów,
 rank_in_region – pozycja typu szpitala w rankingu liczby obsłużonych pacjentów w ramach danego regionu.
 Cyfry w nawiasach odnoszą się do cyfr wykorzystanych na graficznej reprezentacji projektu – patrz opis projektu na stronie kursu.
+
+create database hospital;
+use hospital;
+
+!sh mkdir /tmp/source
+!sh mkdir /tmp/source/hospital
+!sh cp ./datasource4/* /tmp/source/hospital
+
+CREATE EXTERNAL TABLE IF NOT EXISTS hospital_ext(
+ hospital_id STRING, name STRING, city STRING, type STRING)
+ COMMENT 'hospitals'
+ ROW FORMAT DELIMITED
+ FIELDS TERMINATED BY ','
+ STORED AS TEXTFILE
+ location '/tmp/source/hospital';
