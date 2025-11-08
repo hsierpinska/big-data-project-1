@@ -32,4 +32,6 @@ for line in sys.stdin:
 # emitujemy wynik dla ostatniego klucza
 if last_key is not None:
     avg_age = total_age / total_count
-    print(f"{last_key}\t{total_count},{avg_age:.1f}")
+    # print(f"{last_key}\t{total_count},{avg_age:.1f}")
+    print(f"{last_key},{total_count},{avg_age:.1f}") # csv
+
