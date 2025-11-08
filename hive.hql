@@ -11,7 +11,7 @@ CREATE EXTERNAL TABLE stats(
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
-LOCATION '${input_dir3}';
+LOCATION '${hiveconf:input_dir3}';
 
 CREATE EXTERNAL TABLE hospitals(
     hospital_id STRING,
@@ -23,19 +23,19 @@ CREATE EXTERNAL TABLE hospitals(
 ROW FORMAT DELIMITED
 FIELDS TERMINATED BY ','
 STORED AS TEXTFILE
-LOCATION '${input_dir4}';
+LOCATION '${hiveconf:input_dir4}';
 
 CREATE TABLE final_stats(
     region STRING,
     hospital_type STRING,
-    total_patients INT,
+    total_patients BIGINT,   
     avg_age DOUBLE,
     rank_in_region INT
 )
 ROW FORMAT SERDE 'org.apache.hive.hcatalog.data.JsonSerDe'
 STORED AS TEXTFILE;
 
-INSERT OVERWRITE DIRECTORY '${output_dir6}'
+INSERT OVERWRITE DIRECTORY '${hiveconf:output_dir6}'
 ROW FORMAT SERDE 'org.apache.hive.hcatalog.data.JsonSerDe'
 SELECT
     h.country AS region,
