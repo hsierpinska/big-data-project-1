@@ -32,11 +32,11 @@ CREATE TABLE final_stats(
     avg_age DOUBLE,
     rank_in_region INT
 )
-ROW FORMAT SERDE 'org.apache.hive.hcatalog.data.JsonSerDe'
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.JsonSerDe' 
 STORED AS TEXTFILE;
 
 INSERT OVERWRITE DIRECTORY '${hiveconf:output_dir6}'
-ROW FORMAT SERDE 'org.apache.hive.hcatalog.data.JsonSerDe'
+ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.JsonSerDe'
 SELECT
     h.country AS region,
     h.type AS hospital_type,
