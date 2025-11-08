@@ -7,20 +7,29 @@ total_age = 0
 
 for line in sys.stdin:
     line = line.strip()
-    key, value = line.split("\t", 1)
-    count, age = map(int, value.split(","))
+    # pomijamy puste linie
+    if not line:
+        continue  
+
+    try:
+        key, value = line.split("\t", 1)
+        count, age = map(int, value.split(","))
+    except (ValueError, IndexError):
+        continue  # pomijamy wiersze w złym formacie
 
     if last_key == key:
         total_count += count
         total_age += age
     else:
-        if last_key:
-            avg_age = total_age / total_count
-            print(f"{last_key}\t{total_count},{avg_age:.1f}")
+        if last_key is not None:
+            avg_age = total_age / total_count  # obliczamy średni wiek
+            # emitujemy wynik
+            print(f"{last_key}\t{total_count},{avg_age:.1f}")  
         total_count = count
         total_age = age
         last_key = key
 
-if last_key:
+# emitujemy wynik dla ostatniego klucza
+if last_key is not None:
     avg_age = total_age / total_count
     print(f"{last_key}\t{total_count},{avg_age:.1f}")
